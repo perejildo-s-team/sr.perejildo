@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Status;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import utils.MqttCredentials;
+import utils.MqttConstants;
 
 public class Controler {
     public void init() {
         try {
             MemoryPersistence persistence = new MemoryPersistence();
-            MqttClient client = new MqttClient(MqttCredentials.BROKER, MqttCredentials.CLIENT, persistence);
+            MqttClient client = new MqttClient(MqttConstants.BROKER, MqttConstants.CLIENT, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
             connOpts.setUserName(System.getenv("MQTT_USERNAME"));
@@ -35,7 +35,7 @@ public class Controler {
                 }
             });
             client.connect(connOpts);
-            client.subscribe(MqttCredentials.TOPIC);
+            client.subscribe(MqttConstants.TOPIC);
 
             //client.disconnect();
         } catch (MqttException e) {
