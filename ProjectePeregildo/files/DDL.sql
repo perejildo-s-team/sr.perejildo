@@ -2,7 +2,7 @@ USE perejildo;
 
 CREATE TABLE status (
     id_plant varchar(10),
-    time_stamp data,
+    time_stamp timestamp,
     light int,
     soil_humidity int,
     air_humidity int,
