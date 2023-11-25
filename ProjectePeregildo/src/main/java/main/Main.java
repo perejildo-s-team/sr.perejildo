@@ -1,9 +1,9 @@
 package main;
 
-import controler.Controler;
+import controler.Controller;
 
 public class Main {
     public static void main(String[] args) {
-        (new Controler()).init();
+        (new Controller()).init();
     }
 }

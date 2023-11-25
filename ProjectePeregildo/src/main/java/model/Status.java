@@ -13,15 +13,18 @@ public class Status {
     private int airHumidity;
     @JsonProperty("temperature")
     private int temperature;
+    private String timeStamp;
 
     public Status() {
     }
 
-    public Status(String id, int light, int soilHumidity, int temperature) {
+    public Status(String id, int light, int soilHumidity, int airHumidity, int temperature, String timeStamp) {
         this.id = id;
         this.light = light;
         this.soilHumidity = soilHumidity;
+        this.airHumidity = airHumidity;
         this.temperature = temperature;
+        this.timeStamp = timeStamp;
     }
 
     public String getId() {
@@ -64,6 +67,14 @@ public class Status {
         this.airHumidity = airHumidity;
     }
 
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
     @Override
     public String toString() {
         return "Status{" +
@@ -72,6 +83,7 @@ public class Status {
                 ", soilHumidity=" + soilHumidity +
                 ", airHumidity=" + airHumidity +
                 ", temperature=" + temperature +
+                ", timeStamp='" + timeStamp + '\'' +
                 '}';
     }
 }
