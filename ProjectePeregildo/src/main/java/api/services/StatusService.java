@@ -2,14 +2,11 @@ package api.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.StatusDAO;
-import model.Status;
 import utils.DBConnection;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class StatusService {
 
@@ -18,6 +15,7 @@ public class StatusService {
         DBConnection dbConnection = new DBConnection();
         try {
             PrintWriter writer = resp.getWriter();
+            resp.addHeader("Access-Control-Allow-Origin", "*");
             StatusDAO dao = new StatusDAO(dbConnection.connect());
             ObjectMapper mapper = new ObjectMapper();
             try {
