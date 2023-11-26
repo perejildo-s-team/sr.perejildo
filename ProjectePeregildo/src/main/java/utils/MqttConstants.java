@@ -12,7 +12,7 @@ public class MqttConstants {
     /**
      * The MQTT topic to subscribe or publish messages to.
      */
-    public static final String TOPIC = "hackeps/hackeps/eurecat";
+    public static final String TOPIC = "hackeps/eurecat";
 
     /**
      * The client identifier used when connecting to the MQTT broker.

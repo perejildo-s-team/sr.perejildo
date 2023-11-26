@@ -1,21 +1,33 @@
 package api.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.StatusDAO;
+import model.Status;
 import utils.DBConnection;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
-@Path("/status")
-@Produces(value = MediaType.APPLICATION_JSON)
 public class StatusService {
-    @GET
-    public Response getAllStatus() {
+
+    public void getAllStatus(HttpServletResponse resp) {
+        resp.setContentType("application/json");
         DBConnection dbConnection = new DBConnection();
-        StatusDAO dao = new StatusDAO(dbConnection.connect());
-        return Response.ok(dao.getAllStatus()).build();
+        try {
+            PrintWriter writer = resp.getWriter();
+            StatusDAO dao = new StatusDAO(dbConnection.connect());
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                writer.print(mapper.writeValueAsString(dao.getAllStatus()));
+            } catch (NullPointerException ex) {
+                writer.print(mapper.writeValueAsString(""));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        dbConnection.disconnect();
     }
 }
